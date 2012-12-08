@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Octopress | Look out honey ’cause I’m using technology]]></title>
+  <link href="http://haoran-deng.github.com/blog/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://haoran-deng.github.com/blog/"/>
+  <updated>2012-12-08T17:02:44+08:00</updated>
+  <id>http://haoran-deng.github.com/blog/</id>
+  <author>
+    <name><![CDATA[Haoran Deng]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Setup Octopress with Github]]></title>
+    <link href="http://haoran-deng.github.com/blog/blog/2012/12/08/setup-octopress-with-github/"/>
+    <updated>2012-12-08T14:18:00+08:00</updated>
+    <id>http://haoran-deng.github.com/blog/blog/2012/12/08/setup-octopress-with-github</id>
+    <content type="html"><![CDATA[<h2 id="introduction">Introduction</h2>
+
+<p><strong>Octopress</strong> is a fantasic blogging framework which supports Github, Heroku. It’s very esay to set it up, within 5 minutes, a powful and free blog is ready for you. Go ahead and get your hands dirty, nothing gonna be lost!</p>
+
+<h2 id="installation">Installation</h2>
+
+<p>Octopress requires Ruby 1.9.3, so make sure Ruby 1.9.3 has already been installed on you computer. RVM is recommended to install Ruby if Ruby 1.9.3 is missing.</p>
+
+<p><code>
+$ ruby --version  # Should report Ruby 1.9.3
+# If not use below command to install
+$ rvm install 1.9.3
+</code></p>
+
+<h3 id="get-octopress">1. Get Octopress</h3>
+<p>You have to get the Octopress from Github.</p>
+
+<p><code>
+$ cd path/to/directory_where_you_want_to_install_octopress
+$ git clone git://github.com/imathis/octopress.git octopress 
+</code></p>
+
+<h3 id="install-dependencies">2. Install Dependencies</h3>
+<p>Octopress relies on several gems, which should be installed before configuration and running. It’s great that Octopress uses Bundler to manage the dependency, so just use few commands to finish configuration.</p>
+
+<p>You could create a gemset for Octopress if you are using RVM.</p>
+
+<p><code>
+$ rvm --create use 1.9.3@octopress
+</code></p>
+
+<p>And then replace the contents of the <code>.rvmrc</code> file under the root directory of octopress folder with:</p>
+
+<p><code>
+rvm use 1.9.3@octopress
+</code></p>
+
+<p>Then install gems:</p>
+
+<p><code>
+$ gem install bundler # If Bundler is not installed otherwise ignore this command
+$ bundle install # This command will install all required gems automatically
+</code></p>
+
+<h3 id="setup-octopress">3. Setup Octopress</h3>
+
+<p>You could install default Octopress theme by below command:</p>
+
+<p><code>
+$ cd path/to/path_to_octopress_directory
+$ rake install
+</code></p>
+
+<h3 id="custom-configuration">4. Custom Configuration</h3>
+
+<p>You only need to edit <code>_config.yaml</code> to finish configuration. You’ll want to change <code>title</code>, <code>subtitle</code> and <code>author</code> and if you decide to use your own domain, you also have to change <code>url</code>. Below are guides from <a href="http://octopress.org/docs/configuring/">official document</a>.</p>
+
+<p><code>
+url:                # For rewriting urls for RSS, etc
+title:              # Used in the header and title tags
+subtitle:           # A description used in the header
+author:             # Your name, for RSS, Copyright, Metadata
+simple_search:      # Search engine for simple site search
+description:        # A default meta description for your site
+date_format:        # Format dates using Ruby's date strftime syntax
+subscribe_rss:      # Url for your blog's feed, defauts to /atom.xml
+subscribe_email:    # Url to subscribe by email (service required)
+category_feeds:     # Enable per category RSS feeds (defaults to false in 2.1)
+email:              # Email address for the RSS feed if you want it.
+</code></p>
+
+<p>To use <code>Kramdown</code> as default <code>Markdown</code> parser, instead of <code>RDiscount</code>, change <code>markdown: rdiscount</code> to <code>kramdown</code>.</p>
+
+<h3 id="preparation-for-deploy">5. Preparation for Deploy</h3>
+
+<p>I’d like to use Github to host my blog, so below are steps on how to deploy Octopress to Github. Please refer to the <a href="http://octopress.org/docs/deploying/">offical document</a> if you prefer Heroku of Rsync or visit <a href="http://www.moncefbelyamani.com/how-to-install-and-configure-octopress-on-a-mac/">Moncef Belyamani </a> if you think Amazon S3 is good choice.</p>
+
+<p>As we want to deploy to Github, you need a Github account. If you still don’t have, it’s time to get one. Please add the ssh key (which could be found at ~/.ssh/id_rsa.pub) to your Github <code>Account Settings&gt;SSH Keys</code> to make your life easier.</p>
+
+<h4 id="create-repo-for-octopress">5.1 Create repo for Octopress</h4>
+
+<p>Create a new <a href="https://github.com/repositories/new">Github repository</a> with any name you likei, I choose <code>blog</code> here. We’ll take advantage of Github’s Project Pages service which allows you to host a site for your existing open source project. Github will look for a gh-pages branch in your project’s repository and make the contents available at url like <code>http://username.github.com/project</code>.</p>
+
+<p>Here is the command help you set up Octopress site to publish to your projects gh-pages repository:</p>
+
+<p><code>
+$ rake setup_github_pages
+</code></p>
+
+<p>Then you’ll be asked to provide repository url, input <code>git@github.com:username/blog.git</code>. </p>
+
+<p>Next run:</p>
+
+<p>```
+# Commit configuration changes
+$ git add .
+$ git commit -m ‘Custom configurations’</p>
+
+<h1 id="deploy-octopress-to-github">Deploy Octopress to Github</h1>
+<p>$ rake generate
+$ rake deploy
+```</p>
+
+<p>One minute later, please go to <code>http://username.github.com/blog</code> to enjoy you new blog. Quite easy, isn’t it!</p>
+
+<h2 id="writing-blogs">Writing Blogs</h2>
+
+<p>Octopress provides a rake task to create new blog posts with the right naming conventions, with sensible yaml metadata.</p>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>
+$ rake new_post["title"]
+</code></p>
+
+<p><code>new_post</code> expects a naturally written title and strips out undesirable url characters when creating the filename. The default file extension for new posts is <code>markdown</code> but you can configure that in the <code>Rakefile</code>.</p>
+
+<h4 id="example">Example</h4>
+
+<p><code>
+rake new_post["Zombie Ninjas Attack: A survivor's retrospective"]
+# Creates source/_posts/2011-07-03-zombie-ninjas-attack-a-survivors-retrospective.markdown
+</code></p>
+
+<p>Blog posts will be stored in the <code>source/_posts</code> directory with naming conventions: <code>YYYY-MM-DD-post-title.markdown</code>.</p>
+
+<p>The filename will determine your url. With the default permalink settings the url would be something like <code>http://site.com/blog/2011/07/03/zombie-ninjas-attack-a-survivors-retrospective/index.html</code>.</p>
+
+<h3 id="write-your-first-blog">1. Write Your First Blog</h3>
+
+<p>Edit the <code>source/_posts/2011-07-03-zombie-ninjas-attack-a-survivors-retrospective.markdown</code> file with your favorite editor. Then you’ll see a block of yaml at the begnning which decides how to processes posts and pages. </p>
+
+<h2 id="section">```</h2>
+<p>layout: post
+title: “Zombie Ninjas Attack: A survivor’s retrospective”
+date: 2011-07-03 5:59
+# turn comments on/off
+comments: true
+#
+# Multiple categories
+# categories: [CSS3, Sass, Media Queries]
+# or
+# categories:
+# - CSS3
+# - Sass
+# - Media Queries
+categories: Octopress
+# Set to false if you are working on draft
+published: true
+—
+```</p>
+
+<p>Then you could add your content below the header. Please refer to <a href="http://octopress.org/docs"><code>http://octopress.org/docs/</code></a> for the usage of tags. </p>
+
+<h3 id="preview-post">2. Preview Post</h3>
+
+<p>Once you content is written you could preview your post locally.</p>
+
+<p><code>
+$ rake generate   # Generates posts and pages into the public directory
+$ rake preview    # Watches, and mounts a webserver at http://localhost:4000
+</code></p>
+
+<p>If you set <code>published: false</code> in the <code>YAML</code> header, you could preview the post with <code>rake preview</code>, but it won’t get published by <code>rake generate</code>.</p>
+
+<h3 id="deploy-post">3. Deploy Post</h3>
+
+<p>If you are satify with the post, you could deploy the new post to Github server:</p>
+
+<p><code>
+$ rake deploy
+</code></p>
+
+<h2 id="custom-octopress">Custom Octopress</h2>
+
+<p>As a blogger, we always hope our tools could be more powerful. Octopress is easy to be customed to satisfy special requirement.</p>
+
+<h3 id="add-table-support">1. Add Table Support</h3>
+
+<p>The standard <code>Markdown</code> syntax is not support <code>table</code>, however there are several extentions. <code>Kramdown</code> is support <code>table</code> very much. However the CSS style of Octopress make the border of table invisible. We should do some hacks to make the table nicer. <a href="http://samwize.com/2012/09/24/octopress-table-stylesheet/">1</a>, <a href="http://programus.github.com/blog/2012/03/07/add-table-data-css-for-octopress/">2</a></p>
+
+<h4 id="step-1">Step 1</h4>
+
+<p>Create <code>source/stylesheets/table.css</code> and add below content.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>table.css </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">border-style</span><span class="o">:</span><span class="k">solid</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">border-width</span><span class="o">:</span><span class="m">1px</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">border-color</span><span class="o">:</span><span class="m">#e7e3e7</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nt">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span><span class="nt">table</span> <span class="nt">th</span><span class="o">,</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span> <span class="p">{</span>
+</span><span class='line'><span class="k">border-style</span><span class="o">:</span><span class="k">dashed</span><span class="p">;</span>
+</span><span class='line'><span class="k">border-width</span><span class="o">:</span><span class="m">1px</span><span class="p">;</span>
+</span><span class='line'><span class="k">border-color</span><span class="o">:</span><span class="m">#e7e3e7</span><span class="p">;</span>
+</span><span class='line'><span class="k">padding-left</span><span class="o">:</span> <span class="m">3px</span><span class="p">;</span>
+</span><span class='line'><span class="k">padding-right</span><span class="o">:</span> <span class="m">3px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;/</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span><span class="nt">table</span> <span class="nt">th</span> <span class="p">{</span>
+</span><span class='line'><span class="k">border-style</span><span class="o">:</span><span class="k">solid</span><span class="p">;</span>
+</span><span class='line'><span class="k">font-weight</span><span class="o">:</span><span class="k">bold</span><span class="p">;</span>
+</span><span class='line'><span class="k">background</span><span class="o">:</span> <span class="sx">url(“/images/noise.png?1330434582”)</span> <span class="k">repeat</span> <span class="k">scroll</span> <span class="k">left</span> <span class="k">top</span> <span class="m">#F7F3F7</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;/</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span><span class="nt">table</span> <span class="nt">th</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="err">”</span><span class="nt">left</span><span class="err">”</span><span class="o">],</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="err">”</span><span class="nt">left</span><span class="err">”</span><span class="o">]</span> <span class="p">{</span>
+</span><span class='line'><span class="k">text-align</span><span class="o">:</span><span class="k">left</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;/</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span><span class="nt">table</span> <span class="nt">th</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="err">”</span><span class="nt">right</span><span class="err">”</span><span class="o">],</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="err">”</span><span class="nt">right</span><span class="err">”</span><span class="o">]</span> <span class="p">{</span>
+</span><span class='line'><span class="k">text-align</span><span class="o">:</span><span class="k">right</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;/</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span><span class="nt">table</span> <span class="nt">th</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="err">”</span><span class="nt">center</span><span class="err">”</span><span class="o">],</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="err">”</span><span class="nt">center</span><span class="err">”</span><span class="o">]</span> <span class="p">{</span>
+</span><span class='line'><span class="k">text-align</span><span class="o">:</span><span class="k">center</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="step-2">Step 2</h4>
+
+<p>Edit <code>source/_includes/head.html</code>, add:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;link href="/stylesheets/table.css" media="screen, projection" rel="stylesheet" type="text/css" /></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>after line:</p>
+
+<p><code>
+ &lt;link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css"&gt;
+</code></p>
+
+<p>Then you can see:</p>
+
+<p><code>
+|--------------+---------------+--------------|
+| First Header | Second Header | Third Header |
+| :------------| :-----------: | ------------:|
+| Cell         |      Cell     |         Cell |
+|--------------+---------------+---------------
+| Cell         |      Cell     |         Cell |
+|--------------+---------------+--------------|
+</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">First Header</th>
+      <th style="text-align: center">Second Header</th>
+      <th style="text-align: right">Third Header</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Cell</td>
+      <td style="text-align: center">Cell</td>
+      <td style="text-align: right">Cell</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Cell</td>
+      <td style="text-align: center">Cell</td>
+      <td style="text-align: right">Cell</td>
+    </tr>
+  </tbody>
+</table>
+]]></content>
+  </entry>
+  
+</feed>
