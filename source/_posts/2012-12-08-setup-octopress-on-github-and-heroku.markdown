@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Setup Octopress with Github"
+title: "Setup Octopress on Github and Heroku"
 date: 2012-12-08 14:18
 comments: true
 categories: Octopress 
@@ -61,7 +61,7 @@ $ rake install
 
 ### 4. Custom Configuration
 
-You only need to edit `_config.yaml` to finish configuration. You’ll want to change `title`, `subtitle` and `author` and if you decide to use your own domain, you also have to change `url`. Below are guides from [official document](http://octopress.org/docs/configuring/).
+You only need to edit `_config.yml` to finish configuration. You’ll want to change `title`, `subtitle` and `author` and if you decide to use your own domain, you also have to change `url`. Below are guides from [official document](http://octopress.org/docs/configuring/).
 
 ```
 url:                # For rewriting urls for RSS, etc
@@ -172,13 +172,40 @@ $ rake preview    # Watches, and mounts a webserver at http://localhost:4000
 
 If you set `published: false` in the `YAML` header, you could preview the post with `rake preview`, but it won’t get published by `rake generate`.
 
-### 3. Deploy Post
+### 3.1 Deploy to Github
 
 If you are satify with the post, you could deploy the new post to Github server:
 
 ```
 $ rake deploy
 ```
+
+### 3.2 Deploy to Heroku
+
+Heroku is a good choice to host blog too. Again, you need an Heroku account, then install the Heroku tool.
+
+```
+$ gem install heroku
+$ heroku login # Login first and you won't be asked for password during deploying.
+``` 
+
+Next we create an app on heroku that will host the blog
+
+```
+$ heroku apps:create app_name
+$ git remote add heroku git@heroku.com:app_name.git # Add remote
+```
+
+To deploy to Heroku, you have to add the `public` folder to git repo, which keep all compiled files. Remove the `public` line from `.gitignore` file. And commit the content in the foler. Please remember you always have to commit all the changes in the folder before deploying to Heroku.
+
+```
+$ rake generate
+$ git add .
+$ git commit 'Add posts for Heroku'
+$ git push heroku master
+```
+
+Then you could find you blog at `http://app_name.herokuapp.com/blog`. If you don't want to input the blog every time, please refer to the `Use Public Folder as ROOT` section of `Custom Octopress` below.
 
 ## Custom Octopress
 
@@ -259,3 +286,32 @@ Then you can see:
 |--------------+---------------+---------------
 | Cell         |      Cell     |         Cell |
 |--------------+---------------+--------------|
+
+### 2. Use Public folder as ROOT
+
+It's quite easy, all you have to do is edit the `_config.yml` and regenerate files.
+
+{% codeblock _config.yml %}
+-subscribe_rss: /blog/atom.xml
++subscribe_rss: /atom.xml
+-root: /blog
++root: /
+-permalink: /blog/:year/:month/:day/:title/
++permalink: /:year/:month/:day/:title/
+-destination: public/blog
++destination: public/
+-category_dir: blog/categories
++category_dir: categories
+-pagination_dir: blog  # Directory base for pagination URLs eg. /blog/page/2/
++pagination_dir: /  # Directory base for pagination URLs eg. /blog/page/2/
+{% endcodeblock %}
+
+Then regenerate files:
+
+```
+$ rake generate
+$ rake preview
+```
+
+And you could find your blog at `http://127.0.0.1:4000/` or `app_name.herokuapp.com` if it has been deployed to Heroku. 
+

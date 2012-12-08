@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Octopress | Look out honey ’cause I’m using technology]]></title>
+  <link href="http://haoran-deng.github.com/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://haoran-deng.github.com/blog/"/>
+  <updated>2012-12-08T19:09:49+08:00</updated>
+  <id>http://haoran-deng.github.com/blog/</id>
+  <author>
+    <name><![CDATA[Haoran Deng]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Setup Octopress on Github and Heroku]]></title>
+    <link href="http://haoran-deng.github.com/blog/2012/12/08/setup-octopress-on-github-and-heroku/"/>
+    <updated>2012-12-08T14:18:00+08:00</updated>
+    <id>http://haoran-deng.github.com/blog/2012/12/08/setup-octopress-on-github-and-heroku</id>
+    <content type="html"><![CDATA[<h2 id="introduction">Introduction</h2>
+
+<p><strong>Octopress</strong> is a fantasic blogging framework which supports Github, Heroku. It’s very esay to set it up, within 5 minutes, a powful and free blog is ready for you. Go ahead and get your hands dirty, nothing gonna be lost!</p>
+
+<h2 id="installation">Installation</h2>
+
+<p>Octopress requires Ruby 1.9.3, so make sure Ruby 1.9.3 has already been installed on you computer. RVM is recommended to install Ruby if Ruby 1.9.3 is missing.</p>
+
+<p><code>
+$ ruby --version  # Should report Ruby 1.9.3
+# If not use below command to install
+$ rvm install 1.9.3
+</code></p>
+
+<h3 id="get-octopress">1. Get Octopress</h3>
+<p>You have to get the Octopress from Github.</p>
+
+<p><code>
+$ cd path/to/directory_where_you_want_to_install_octopress
+$ git clone git://github.com/imathis/octopress.git octopress 
+</code></p>
+
+<h3 id="install-dependencies">2. Install Dependencies</h3>
+<p>Octopress relies on several gems, which should be installed before configuration and running. It’s great that Octopress uses Bundler to manage the dependency, so just use few commands to finish configuration.</p>
+
+<p>You could create a gemset for Octopress if you are using RVM.</p>
+
+<p><code>
+$ rvm --create use 1.9.3@octopress
+</code></p>
+
+<p>And then replace the contents of the <code>.rvmrc</code> file under the root directory of octopress folder with:</p>
+
+<p><code>
+rvm use 1.9.3@octopress
+</code></p>
+
+<p>Then install gems:</p>
+
+<p><code>
+$ gem install bundler # If Bundler is not installed otherwise ignore this command
+$ bundle install # This command will install all required gems automatically
+</code></p>
+
+<h3 id="setup-octopress">3. Setup Octopress</h3>
+
+<p>You could install default Octopress theme by below command:</p>
+
+<p><code>
+$ cd path/to/path_to_octopress_directory
+$ rake install
+</code></p>
+
+<h3 id="custom-configuration">4. Custom Configuration</h3>
+
+<p>You only need to edit <code>_config.yml</code> to finish configuration. You’ll want to change <code>title</code>, <code>subtitle</code> and <code>author</code> and if you decide to use your own domain, you also have to change <code>url</code>. Below are guides from <a href="http://octopress.org/docs/configuring/">official document</a>.</p>
+
+<p><code>
+url:                # For rewriting urls for RSS, etc
+title:              # Used in the header and title tags
+subtitle:           # A description used in the header
+author:             # Your name, for RSS, Copyright, Metadata
+simple_search:      # Search engine for simple site search
+description:        # A default meta description for your site
+date_format:        # Format dates using Ruby's date strftime syntax
+subscribe_rss:      # Url for your blog's feed, defauts to /atom.xml
+subscribe_email:    # Url to subscribe by email (service required)
+category_feeds:     # Enable per category RSS feeds (defaults to false in 2.1)
+email:              # Email address for the RSS feed if you want it.
+</code></p>
+
+<p>To use <code>Kramdown</code> as default <code>Markdown</code> parser, instead of <code>RDiscount</code>, change <code>markdown: rdiscount</code> to <code>kramdown</code>.</p>
+
+<h3 id="preparation-for-deploy">5. Preparation for Deploy</h3>
+
+<p>I’d like to use Github to host my blog, so below are steps on how to deploy Octopress to Github. Please refer to the <a href="http://octopress.org/docs/deploying/">offical document</a> if you prefer Heroku of Rsync or visit <a href="http://www.moncefbelyamani.com/how-to-install-and-configure-octopress-on-a-mac/">Moncef Belyamani </a> if you think Amazon S3 is good choice.</p>
+
+<p>As we want to deploy to Github, you need a Github account. If you still don’t have, it’s time to get one. Please add the ssh key (which could be found at ~/.ssh/id_rsa.pub) to your Github <code>Account Settings&gt;SSH Keys</code> to make your life easier.</p>
+
+<h4 id="create-repo-for-octopress">5.1 Create repo for Octopress</h4>
+
+<p>Create a new <a href="https://github.com/repositories/new">Github repository</a> with any name you likei, I choose <code>blog</code> here. We’ll take advantage of Github’s Project Pages service which allows you to host a site for your existing open source project. Github will look for a gh-pages branch in your project’s repository and make the contents available at url like <code>http://username.github.com/project</code>.</p>
+
+<p>Here is the command help you set up Octopress site to publish to your projects gh-pages repository:</p>
+
+<p><code>
+$ rake setup_github_pages
+</code></p>
+
+<p>Then you’ll be asked to provide repository url, input <code>git@github.com:username/blog.git</code>. </p>
+
+<p>Next run:</p>
+
+<p>```
+# Commit configuration changes
+$ git add .
+$ git commit -m ‘Custom configurations’</p>
+
+<h1 id="deploy-octopress-to-github">Deploy Octopress to Github</h1>
+<p>$ rake generate
+$ rake deploy
+```</p>
+
+<p>One minute later, please go to <code>http://username.github.com/blog</code> to enjoy you new blog. Quite easy, isn’t it!</p>
+
+<h2 id="writing-blogs">Writing Blogs</h2>
+
+<p>Octopress provides a rake task to create new blog posts with the right naming conventions, with sensible yaml metadata.</p>
+
+<h4 id="syntax">Syntax</h4>
+
+<p><code>
+$ rake new_post["title"]
+</code></p>
+
+<p><code>new_post</code> expects a naturally written title and strips out undesirable url characters when creating the filename. The default file extension for new posts is <code>markdown</code> but you can configure that in the <code>Rakefile</code>.</p>
+
+<h4 id="example">Example</h4>
+
+<p><code>
+rake new_post["Zombie Ninjas Attack: A survivor's retrospective"]
+# Creates source/_posts/2011-07-03-zombie-ninjas-attack-a-survivors-retrospective.markdown
+</code></p>
+
+<p>Blog posts will be stored in the <code>source/_posts</code> directory with naming conventions: <code>YYYY-MM-DD-post-title.markdown</code>.</p>
+
+<p>The filename will determine your url. With the default permalink settings the url would be something like <code>http://site.com/blog/2011/07/03/zombie-ninjas-attack-a-survivors-retrospective/index.html</code>.</p>
+
+<h3 id="write-your-first-blog">1. Write Your First Blog</h3>
+
+<p>Edit the <code>source/_posts/2011-07-03-zombie-ninjas-attack-a-survivors-retrospective.markdown</code> file with your favorite editor. Then you’ll see a block of yaml at the begnning which decides how to processes posts and pages. </p>
+
+<h2 id="section">```</h2>
+<p>layout: post
+title: “Zombie Ninjas Attack: A survivor’s retrospective”
+date: 2011-07-03 5:59
+# turn comments on/off
+comments: true
+#
+# Multiple categories
+# categories: [CSS3, Sass, Media Queries]
+# or
+# categories:
+# - CSS3
+# - Sass
+# - Media Queries
+categories: Octopress
+# Set to false if you are working on draft
+published: true
+—
+```</p>
+
+<p>Then you could add your content below the header. Please refer to <a href="http://octopress.org/docs"><code>http://octopress.org/docs/</code></a> for the usage of tags. </p>
+
+<h3 id="preview-post">2. Preview Post</h3>
+
+<p>Once you content is written you could preview your post locally.</p>
+
+<p><code>
+$ rake generate   # Generates posts and pages into the public directory
+$ rake preview    # Watches, and mounts a webserver at http://localhost:4000
+</code></p>
+
+<p>If you set <code>published: false</code> in the <code>YAML</code> header, you could preview the post with <code>rake preview</code>, but it won’t get published by <code>rake generate</code>.</p>
+
+<h3 id="deploy-to-github">3.1 Deploy to Github</h3>
+
+<p>If you are satify with the post, you could deploy the new post to Github server:</p>
+
+<p><code>
+$ rake deploy
+</code></p>
+
+<h3 id="deploy-to-heroku">3.2 Deploy to Heroku</h3>
+
+<p>Heroku is a good choice to host blog too. Again, you need an Heroku account, then install the Heroku tool.</p>
+
+<p><code>
+$ gem install heroku
+$ heroku login # Login first and you won't be asked for password during deploying.
+</code> </p>
+
+<p>Next we create an app on heroku that will host the blog</p>
+
+<p><code>
+$ heroku apps:create app_name
+$ git remote add heroku git@heroku.com:app_name.git # Add remote
+</code></p>
+
+<p>To deploy to Heroku, you have to add the <code>public</code> folder to git repo, which keep all compiled files. Remove the <code>public</code> line from <code>.gitignore</code> file. And commit the content in the foler. Please remember you always have to commit all the changes in the folder before deploying to Heroku.</p>
+
+<p><code>
+$ rake generate
+$ git add .
+$ git commit 'Add posts for Heroku'
+$ git push heroku master
+</code></p>
+
+<p>Then you could find you blog at <code>http://app_name.herokuapp.com/blog</code>. If you don’t want to input the blog every time, please refer to the <code>Use Public Folder as ROOT</code> section of <code>Custom Octopress</code> below.</p>
+
+<h2 id="custom-octopress">Custom Octopress</h2>
+
+<p>As a blogger, we always hope our tools could be more powerful. Octopress is easy to be customed to satisfy special requirement.</p>
+
+<h3 id="add-table-support">1. Add Table Support</h3>
+
+<p>The standard <code>Markdown</code> syntax is not support <code>table</code>, however there are several extentions. <code>Kramdown</code> is support <code>table</code> very much. However the CSS style of Octopress make the border of table invisible. We should do some hacks to make the table nicer. <a href="http://samwize.com/2012/09/24/octopress-table-stylesheet/">1</a>, <a href="http://programus.github.com/blog/2012/03/07/add-table-data-css-for-octopress/">2</a></p>
+
+<h4 id="step-1">Step 1</h4>
+
+<p>Create <code>source/stylesheets/table.css</code> and add below content.</p>
+
+<p>{% codeblock table.css %}
+* + table {
+  border-style:solid;
+  border-width:1px;
+  border-color:#e7e3e7;
+}</p>
+
+<ul>
+  <li>
+    <ul>
+      <li>table th, * + table td {
+border-style:dashed;
+border-width:1px;
+border-color:#e7e3e7;
+padding-left: 3px;
+padding-right: 3px;
+}</li>
+    </ul>
+  </li>
+  <li>
+    <ul>
+      <li>table th {
+border-style:solid;
+font-weight:bold;
+background: url(“/images/noise.png?1330434582”) repeat scroll left top #F7F3F7;
+}</li>
+    </ul>
+  </li>
+  <li>
+    <ul>
+      <li>table th[align=”left”], * + table td[align=”left”] {
+text-align:left;
+}</li>
+    </ul>
+  </li>
+  <li>
+    <ul>
+      <li>table th[align=”right”], * + table td[align=”right”] {
+text-align:right;
+}</li>
+    </ul>
+  </li>
+  <li>
+    <ul>
+      <li>table th[align=”center”], * + table td[align=”center”] {
+text-align:center;
+}
+{% endcodeblock %}</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="step-2">Step 2</h4>
+
+<p>Edit <code>source/_includes/head.html</code>, add:</p>
+
+<p>{% codeblock %}
+  <link href="{{ root_url }}/stylesheets/table.css" media="screen, projection" rel="stylesheet" type="text/css" />
+{% endcodeblock %}</p>
+
+<p>after line:</p>
+
+<p><code>
+ &lt;link href="{{ root_url }}/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css"&gt;
+</code></p>
+
+<p>Then you can see:</p>
+
+<p><code>
+|--------------+---------------+--------------|
+| First Header | Second Header | Third Header |
+| :------------| :-----------: | ------------:|
+| Cell         |      Cell     |         Cell |
+|--------------+---------------+---------------
+| Cell         |      Cell     |         Cell |
+|--------------+---------------+--------------|
+</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">First Header</th>
+      <th style="text-align: center">Second Header</th>
+      <th style="text-align: right">Third Header</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Cell</td>
+      <td style="text-align: center">Cell</td>
+      <td style="text-align: right">Cell</td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Cell</td>
+      <td style="text-align: center">Cell</td>
+      <td style="text-align: right">Cell</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="use-public-folder-as-root">2. Use Public folder as ROOT</h3>
+
+<p>It’s quite easy, all you have to do is edit the <code>_config.yml</code> and regenerate files.</p>
+
+<p>{% codeblock _config.yml %}
+-subscribe_rss: /blog/atom.xml
++subscribe_rss: /atom.xml
+ subscribe_email:
+ # RSS feeds can list your email address if you like
+ email:
+@@ -27,18 +27,18 @@ email:</p>
+
+<p># If publishing to a subdirectory as in http://site.com/project set ‘root: /project’
+ root: /
+-permalink: /blog/:year/:month/:day/:title/
++permalink: /:year/:month/:day/:title/
+ source: source
+ #destination: public/blog
+ destination: public/
+ plugins: plugins
+ code_dir: downloads/code
+-category_dir: blog/categories
++category_dir: categories
+ markdown: kramdown
+ pygments: false # default python pygments have been replaced by pygments.rb</p>
+
+<p>paginate: 10          # Posts per page on the blog index
+-pagination_dir: blog  # Directory base for pagination URLs eg. /blog/page/2/
++pagination_dir: /  # Directory base for pagination URLs eg. /blog/page/2/
+ recent_posts: 5       # Posts in the sidebar Recent Posts section
+ excerpt_link: “Read on →”  # “Continue reading” link text at the bottom of excerpted articles
+{% endcodeblock %}</p>
+
+]]></content>
+  </entry>
+  
+</feed>

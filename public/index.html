@@ -25,7 +25,7 @@
   <script src="/javascripts/modernizr-2.0.js"></script>
   <script src="/javascripts/ender.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/blog/atom.xml" rel="alternate" title="Look out honey ’cause I’m using technology" type="application/atom+xml">
+  <link href="/atom.xml" rel="alternate" title="Look out honey ’cause I’m using technology" type="application/atom+xml">
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
@@ -44,7 +44,7 @@
 
 </header>
   <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/blog/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
   
 </ul>
   
@@ -71,7 +71,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/12/08/setup-octopress-with-github/">Setup Octopress With Github</a></h1>
+      <h1 class="entry-title"><a href="/2012/12/08/setup-octopress-on-github-and-heroku/">Setup Octopress on Github and Heroku</a></h1>
     
     
       <p class="meta">
@@ -287,12 +287,41 @@
 
 <p>If you set <code>published: false</code> in the <code>YAML</code> header, you could preview the post with <code>rake preview</code>, but it won’t get published by <code>rake generate</code>.</p>
 
-<h3 id="deploy-post">3. Deploy Post</h3>
+<h3 id="deploy-to-github">3.1 Deploy to Github</h3>
 
 <p>If you are satify with the post, you could deploy the new post to Github server:</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 </pre></td><td class="code"><pre><code class=""><span class="line">$ rake deploy</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="deploy-to-heroku">3.2 Deploy to Heroku</h3>
+
+<p>Heroku is a good choice to host blog too. Again, you need an Heroku account, then install the Heroku tool.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ gem install heroku
+</span><span class="line">$ heroku login # Login first and you won't be asked for password during deploying.</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Next we create an app on heroku that will host the blog</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ heroku apps:create app_name
+</span><span class="line">$ git remote add heroku git@heroku.com:app_name.git # Add remote</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>To deploy to Heroku, you have to add the <code>public</code> folder to git repo, which keep all compiled files. Remove the <code>public</code> line from <code>.gitignore</code> file. And commit the content in the foler. Please remember you always have to commit all the changes in the folder before deploying to Heroku.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ rake generate
+</span><span class="line">$ git add .
+</span><span class="line">$ git commit 'Add posts for Heroku'
+</span><span class="line">$ git push heroku master</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Then you could find you blog at <code>http://app_name.herokuapp.com/blog</code>. If you don’t want to input the blog every time, please refer to the <code>Use Public Folder as ROOT</code> section of <code>Custom Octopress</code> below.</p>
 
 <h2 id="custom-octopress">Custom Octopress</h2>
 
@@ -423,6 +452,9 @@
     </tr>
   </tbody>
 </table>
+
+<h3 id="use-public-folder-as-root">2. Use Public folder as ROOT</h3>
+
 </div>
   
   
@@ -443,7 +475,7 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2012/12/08/setup-octopress-with-github/">Setup Octopress with Github</a>
+        <a href="/2012/12/08/setup-octopress-on-github-and-heroku/">Setup Octopress on Github and Heroku</a>
       </li>
     
   </ul>
