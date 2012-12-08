@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Octopress | Look out honey ’cause I’m using technology]]></title>
   <link href="http://haoran-deng.github.com/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://haoran-deng.github.com/blog/"/>
-  <updated>2012-12-08T19:09:49+08:00</updated>
+  <updated>2012-12-08T19:19:14+08:00</updated>
   <id>http://haoran-deng.github.com/blog/</id>
   <author>
     <name><![CDATA[Haoran Deng]]></name>
@@ -230,54 +230,100 @@ $ git push heroku master
 
 <p>Create <code>source/stylesheets/table.css</code> and add below content.</p>
 
-<p>{% codeblock table.css %}
-* + table {
-  border-style:solid;
-  border-width:1px;
-  border-color:#e7e3e7;
-}</p>
-
-<ul>
-  <li>
-    <ul>
-      <li>table th, * + table td {
-border-style:dashed;
-border-width:1px;
-border-color:#e7e3e7;
-padding-left: 3px;
-padding-right: 3px;
-}</li>
-    </ul>
-  </li>
-  <li>
-    <ul>
-      <li>table th {
-border-style:solid;
-font-weight:bold;
-background: url(“/images/noise.png?1330434582”) repeat scroll left top #F7F3F7;
-}</li>
-    </ul>
-  </li>
-  <li>
-    <ul>
-      <li>table th[align=”left”], * + table td[align=”left”] {
-text-align:left;
-}</li>
-    </ul>
-  </li>
-  <li>
-    <ul>
-      <li>table th[align=”right”], * + table td[align=”right”] {
-text-align:right;
-}</li>
-    </ul>
-  </li>
-  <li>
-    <ul>
-      <li>table th[align=”center”], * + table td[align=”center”] {
-text-align:center;
-}
-{% endcodeblock %}</li>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>table.css </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">border-style</span><span class="o">:</span><span class="k">solid</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">border-width</span><span class="o">:</span><span class="m">1px</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">border-color</span><span class="o">:</span><span class="m">#e7e3e7</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nt">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span><span class="nt">table</span> <span class="nt">th</span><span class="o">,</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span> <span class="p">{</span>
+</span><span class='line'><span class="k">border-style</span><span class="o">:</span><span class="k">dashed</span><span class="p">;</span>
+</span><span class='line'><span class="k">border-width</span><span class="o">:</span><span class="m">1px</span><span class="p">;</span>
+</span><span class='line'><span class="k">border-color</span><span class="o">:</span><span class="m">#e7e3e7</span><span class="p">;</span>
+</span><span class='line'><span class="k">padding-left</span><span class="o">:</span> <span class="m">3px</span><span class="p">;</span>
+</span><span class='line'><span class="k">padding-right</span><span class="o">:</span> <span class="m">3px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;/</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span><span class="nt">table</span> <span class="nt">th</span> <span class="p">{</span>
+</span><span class='line'><span class="k">border-style</span><span class="o">:</span><span class="k">solid</span><span class="p">;</span>
+</span><span class='line'><span class="k">font-weight</span><span class="o">:</span><span class="k">bold</span><span class="p">;</span>
+</span><span class='line'><span class="k">background</span><span class="o">:</span> <span class="sx">url(“/images/noise.png?1330434582”)</span> <span class="k">repeat</span> <span class="k">scroll</span> <span class="k">left</span> <span class="k">top</span> <span class="m">#F7F3F7</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;/</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span><span class="nt">table</span> <span class="nt">th</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="err">”</span><span class="nt">left</span><span class="err">”</span><span class="o">],</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="err">”</span><span class="nt">left</span><span class="err">”</span><span class="o">]</span> <span class="p">{</span>
+</span><span class='line'><span class="k">text-align</span><span class="o">:</span><span class="k">left</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;/</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span><span class="nt">table</span> <span class="nt">th</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="err">”</span><span class="nt">right</span><span class="err">”</span><span class="o">],</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="err">”</span><span class="nt">right</span><span class="err">”</span><span class="o">]</span> <span class="p">{</span>
+</span><span class='line'><span class="k">text-align</span><span class="o">:</span><span class="k">right</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;/</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;/</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="o">&lt;</span><span class="nt">ul</span><span class="o">&gt;</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="nt">li</span><span class="o">&gt;</span><span class="nt">table</span> <span class="nt">th</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="err">”</span><span class="nt">center</span><span class="err">”</span><span class="o">],</span> <span class="o">*</span> <span class="o">+</span> <span class="nt">table</span> <span class="nt">td</span><span class="o">[</span><span class="nt">align</span><span class="o">=</span><span class="err">”</span><span class="nt">center</span><span class="err">”</span><span class="o">]</span> <span class="p">{</span>
+</span><span class='line'><span class="k">text-align</span><span class="o">:</span><span class="k">center</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></li>
     </ul>
   </li>
 </ul>
@@ -286,14 +332,13 @@ text-align:center;
 
 <p>Edit <code>source/_includes/head.html</code>, add:</p>
 
-<p>{% codeblock %}
-  <link href="{{ root_url }}/stylesheets/table.css" media="screen, projection" rel="stylesheet" type="text/css" />
-{% endcodeblock %}</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;link href="/stylesheets/table.css" media="screen, projection" rel="stylesheet" type="text/css" /></span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>after line:</p>
 
 <p><code>
- &lt;link href="{{ root_url }}/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css"&gt;
+ &lt;link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css"&gt;
 </code></p>
 
 <p>Then you can see:</p>
@@ -336,34 +381,41 @@ text-align:center;
 
 <p>It’s quite easy, all you have to do is edit the <code>_config.yml</code> and regenerate files.</p>
 
-<p>{% codeblock _config.yml %}
--subscribe_rss: /blog/atom.xml
-+subscribe_rss: /atom.xml
- subscribe_email:
- # RSS feeds can list your email address if you like
- email:
-@@ -27,18 +27,18 @@ email:</p>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>_config.yml </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='yaml'><span class='line'><span class="l-Scalar-Plain">-subscribe_rss</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/blog/atom.xml</span>
+</span><span class='line'><span class="l-Scalar-Plain">+subscribe_rss</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/atom.xml</span>
+</span><span class='line'><span class="l-Scalar-Plain">-root</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/blog</span>
+</span><span class='line'><span class="l-Scalar-Plain">+root</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/</span>
+</span><span class='line'><span class="l-Scalar-Plain">-permalink</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/blog/:year/:month/:day/:title/</span>
+</span><span class='line'><span class="l-Scalar-Plain">+permalink</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/:year/:month/:day/:title/</span>
+</span><span class='line'><span class="l-Scalar-Plain">-destination</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">public/blog</span>
+</span><span class='line'><span class="l-Scalar-Plain">+destination</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">public/</span>
+</span><span class='line'><span class="l-Scalar-Plain">-category_dir</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">blog/categories</span>
+</span><span class='line'><span class="l-Scalar-Plain">+category_dir</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">categories</span>
+</span><span class='line'><span class="l-Scalar-Plain">-pagination_dir</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">blog</span>  <span class="c1"># Directory base for pagination URLs eg. /blog/page/2/</span>
+</span><span class='line'><span class="l-Scalar-Plain">+pagination_dir</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/</span>  <span class="c1"># Directory base for pagination URLs eg. /blog/page/2/</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p># If publishing to a subdirectory as in http://site.com/project set ‘root: /project’
- root: /
--permalink: /blog/:year/:month/:day/:title/
-+permalink: /:year/:month/:day/:title/
- source: source
- #destination: public/blog
- destination: public/
- plugins: plugins
- code_dir: downloads/code
--category_dir: blog/categories
-+category_dir: categories
- markdown: kramdown
- pygments: false # default python pygments have been replaced by pygments.rb</p>
+<p>Then regenerate files:</p>
 
-<p>paginate: 10          # Posts per page on the blog index
--pagination_dir: blog  # Directory base for pagination URLs eg. /blog/page/2/
-+pagination_dir: /  # Directory base for pagination URLs eg. /blog/page/2/
- recent_posts: 5       # Posts in the sidebar Recent Posts section
- excerpt_link: “Read on →”  # “Continue reading” link text at the bottom of excerpted articles
-{% endcodeblock %}</p>
+<p><code>
+$ rake generate
+$ rake preview
+</code></p>
+
+<p>And you could find your blog at <code>http://127.0.0.1:4000/</code> or <code>app_name.herokuapp.com</code> if it has been deployed to Heroku. </p>
 
 ]]></content>
   </entry>

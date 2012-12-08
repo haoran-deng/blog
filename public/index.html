@@ -148,7 +148,7 @@
 
 <h3 id="custom-configuration">4. Custom Configuration</h3>
 
-<p>You only need to edit <code>_config.yaml</code> to finish configuration. You’ll want to change <code>title</code>, <code>subtitle</code> and <code>author</code> and if you decide to use your own domain, you also have to change <code>url</code>. Below are guides from <a href="http://octopress.org/docs/configuring/">official document</a>.</p>
+<p>You only need to edit <code>_config.yml</code> to finish configuration. You’ll want to change <code>title</code>, <code>subtitle</code> and <code>author</code> and if you decide to use your own domain, you also have to change <code>url</code>. Below are guides from <a href="http://octopress.org/docs/configuring/">official document</a>.</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -454,6 +454,44 @@
 </table>
 
 <h3 id="use-public-folder-as-root">2. Use Public folder as ROOT</h3>
+
+<p>It’s quite easy, all you have to do is edit the <code>_config.yml</code> and regenerate files.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span>_config.yml </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+</pre></td><td class="code"><pre><code class="yaml"><span class="line"><span class="l-Scalar-Plain">-subscribe_rss</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/blog/atom.xml</span>
+</span><span class="line"><span class="l-Scalar-Plain">+subscribe_rss</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/atom.xml</span>
+</span><span class="line"><span class="l-Scalar-Plain">-root</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/blog</span>
+</span><span class="line"><span class="l-Scalar-Plain">+root</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/</span>
+</span><span class="line"><span class="l-Scalar-Plain">-permalink</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/blog/:year/:month/:day/:title/</span>
+</span><span class="line"><span class="l-Scalar-Plain">+permalink</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/:year/:month/:day/:title/</span>
+</span><span class="line"><span class="l-Scalar-Plain">-destination</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">public/blog</span>
+</span><span class="line"><span class="l-Scalar-Plain">+destination</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">public/</span>
+</span><span class="line"><span class="l-Scalar-Plain">-category_dir</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">blog/categories</span>
+</span><span class="line"><span class="l-Scalar-Plain">+category_dir</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">categories</span>
+</span><span class="line"><span class="l-Scalar-Plain">-pagination_dir</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">blog</span>  <span class="c1"># Directory base for pagination URLs eg. /blog/page/2/</span>
+</span><span class="line"><span class="l-Scalar-Plain">+pagination_dir</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/</span>  <span class="c1"># Directory base for pagination URLs eg. /blog/page/2/</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Then regenerate files:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ rake generate
+</span><span class="line">$ rake preview</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>And you could find your blog at <code>http://127.0.0.1:4000/</code> or <code>app_name.herokuapp.com</code> if it has been deployed to Heroku. </p>
 
 </div>
   

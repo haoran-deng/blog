@@ -287,6 +287,7 @@ Then you can see:
 | Cell         |      Cell     |         Cell |
 |--------------+---------------+--------------|
 
+
 ### 2. Use Public folder as ROOT
 
 It's quite easy, all you have to do is edit the `_config.yml` and regenerate files.
