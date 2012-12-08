@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Look out honey ’cause I’m using technology]]></title>
+  <link href="http://haoran-deng.github.com/blog/atom.xml" rel="self"/>
+  <link href="http://haoran-deng.github.com/blog/"/>
+  <updated>2012-12-08T16:43:46+08:00</updated>
+  <id>http://haoran-deng.github.com/blog/</id>
+  <author>
+    <name><![CDATA[Haoran Deng]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+</feed>
